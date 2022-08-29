@@ -1,20 +1,22 @@
 <template>
-  <div v-if="disableHead == false">
-    <h1>Welcome to My Movie</h1>
-    <div>
-      <h2>New User?</h2>
-      <router-link to="/signup">
-        <button @click="disableHeader">Sign Up</button>
-      </router-link>
-    </div>
+  <base-card>
+    <div v-if="disableHead == false">
+      <h1>Welcome to My Movie</h1>
+      <div>
+        <h2>New User?</h2>
+        <router-link to="/signup">
+          <base-button @click="disableHeader">Sign Up</base-button>
+        </router-link>
+      </div>
 
-    <div>
-      <p>Already a User?</p>
-      <router-link to="/login">
-        <button @click="enableLogin">Login</button></router-link
-      >
+      <div>
+        <h2>Already a User?</h2>
+        <router-link to="/login">
+          <base-button @click="enableLogin">Login</base-button></router-link
+        >
+      </div>
     </div>
-  </div>
+  </base-card>
 </template>
 
 <script>

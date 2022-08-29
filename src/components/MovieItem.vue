@@ -1,8 +1,9 @@
 <template>
   <base-card>
     <base-button @click="loadFavourites">Favourite</base-button>
-    <h1>name={{ name }}</h1>
-    <h2>rank={{ rank }}</h2>
+    <div class=""></div>
+    <!-- <h1>name={{ name }}</h1>
+    <h2>rank={{ rank }}</h2> -->
 
     <img :src="link" />
   </base-card>
