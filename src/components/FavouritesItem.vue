@@ -1,10 +1,7 @@
 <template>
-  <base-card>
-    <h1>name={{ name }}</h1>
-    <h2>rank={{ rank }}</h2>
-
+  <div class="item-action">
     <img :src="link" />
-  </base-card>
+  </div>
 </template>
 <script>
 import { ref } from "vue";
@@ -25,6 +22,14 @@ export default {
 </script>
 <style scopes>
 img {
-  max-width: 40rem;
+  height: 80%;
+  width: 80%;
+  object-fit: cover;
+}
+.item-action {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

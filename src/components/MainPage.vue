@@ -1,20 +1,30 @@
 <template>
   <div>
     <the-header></the-header>
-    <button @click="check">Check</button>
+
     <movie-filters @change-filters="setFilters"></movie-filters>
     <form @submit.prevent="submitForm">
-      <div>
-        <label for="searchMovies">Search Movies</label>
-        <input type="text" id="searchMovies" v-model="searchValue" />
-      </div>
-      <button @click="newDefault">Submits</button>
+      <base-card>
+        <div class="search-action">
+          <label for="searchMovies"></label>
+          <input
+            class="searchInput"
+            type="text"
+            id="searchMovies"
+            v-model="searchValue"
+            placeholder="Search Movies"
+          />
+        </div>
+        <div class="action">
+          <button @click="newDefault">Get started</button>
+        </div>
+      </base-card>
     </form>
     <div v-if="isLoading">
-      <h1>isLoading...</h1>
       <base-spinner></base-spinner>
     </div>
-    <ul v-else-if="!isFiltered">
+
+    <ul class="movieaction" v-else>
       <movie-item
         v-for="movie in movieList"
         :key="movie.id"
@@ -45,15 +55,28 @@ export default {
     const defaultValue = ref("iron");
     const searchValue = ref("");
     const isFiltered = ref(false);
+
     const activeFilters = reactive({
       rankByAsc: false,
       rankByDesc: false,
+      movie: false,
+      tvShows: false,
     });
 
     const movieList = computed(() => {
       let movies = store.getters["movies/isMovies"];
-      console.log("hello filter");
-      if (activeFilters.rankByAsc && !activeFilters.rankByDesc) {
+      console.log("unfilter", movies);
+      movies = movies.filter(
+        (movie) => movie.image != undefined && movie.qid != undefined
+      );
+      console.log("filter", movies);
+
+      if (
+        activeFilters.rankByAsc &&
+        !activeFilters.rankByDesc &&
+        !activeFilters.movie &&
+        !activeFilters.tvShows
+      ) {
         movies = movies.sort(function (a, b) {
           return a.rank - b.rank;
         });
@@ -61,8 +84,12 @@ export default {
         movies = movies.sort(function (a, b) {
           return b.rank - a.rank;
         });
+      } else if (activeFilters.movie) {
+        movies = movies.filter((movie) => movie.qid == "movie");
+      } else if (activeFilters.tvShows) {
+        movies = movies.filter((movie) => movie.qid == "tvSeries");
       }
-      console.log("movies is still there");
+      console.log("movies is still there", movies);
       return movies;
     });
     function check() {
@@ -74,19 +101,31 @@ export default {
     }
     async function loadMovies() {
       isLoading.value = true;
-      store.dispatch("movies/fetchMovies", defaultValue);
+      try {
+        await store.dispatch("movies/fetchMovies", defaultValue);
+      } catch (e) {
+        console.log("error here", e);
+      }
       isLoading.value = false;
     }
 
     loadMovies();
-    function newDefault() {
+    async function newDefault() {
       if (searchValue.value != "") {
         isLoading.value = true;
-        store.dispatch("movies/fetchMovies", searchValue);
+        try {
+          await store.dispatch("movies/fetchMovies", searchValue);
+        } catch (e) {
+          console.log("error is", e);
+        }
         isLoading.value = false;
       } else {
         isLoading.value = true;
-        store.dispatch("movies/fetchMovies", defaultValue);
+        try {
+          await store.dispatch("movies/fetchMovies", defaultValue);
+        } catch (e) {
+          console.log("error here", e);
+        }
         isLoading.value = false;
       }
     }
@@ -104,3 +143,51 @@ export default {
   },
 };
 </script>
+<style scoped>
+.search-action {
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5px;
+}
+.searchInput {
+  width: 30%;
+  height: 30%;
+}
+.movieaction {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0;
+}
+button,
+a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+a:hover,
+a:active,
+button:hover,
+button:active {
+  background-color: #270041;
+  border-color: #270041;
+}
+</style>
