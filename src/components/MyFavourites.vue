@@ -1,6 +1,8 @@
 <template>
   <the-header></the-header>
-  <h1>My Favorite Movies</h1>
+  <base-card class="font-bold text-3xl bg-blue-800 text-white"
+    >My Favorite Movies</base-card
+  >
   <div class="card">
     <ul class="favorite-action">
       <f-item

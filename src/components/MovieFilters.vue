@@ -1,7 +1,11 @@
 <template>
-  <div class="filter">
-    <h3>Filter</h3>
-    <div class="filter-container">
+  <div class="filter mt-1">
+    <base-button
+      class="font-bold text-2xl text-center p-0"
+      @click="enableFilter"
+      >Filter</base-button
+    >
+    <div class="filter-container border-2 m-3 rounded-lg p-2" v-if="enable">
       <span class="filter-option">
         <input type="checkbox" id="rankByAsc" @change="setFilter" />
         <label for="rankByAsc">RankByAsc</label>
@@ -23,10 +27,18 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 export default {
   emits: ["change-filters"],
   setup(props, context) {
+    const enable = ref(false);
+    function enableFilter() {
+      if (enable.value) {
+        enable.value = false;
+      } else {
+        enable.value = true;
+      }
+    }
     const filters = reactive({
       rankByAsc: false,
       rankByDesc: false,
@@ -46,7 +58,7 @@ export default {
       "filters", filters;
       context.emit("change-filters", updateFilters);
     }
-    return { filters, setFilter };
+    return { enable, enableFilter, filters, setFilter };
   },
 };
 </script>
@@ -60,13 +72,17 @@ h2 {
   padding: 1rem;
   margin: 2rem auto;
   max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .filter-option {
   margin-right: 1rem;
 }
-.filter-container {
+/* .filter-container {
   margin-left: 8rem;
-}
+} */
 
 .filter-option label,
 .filter-option input {

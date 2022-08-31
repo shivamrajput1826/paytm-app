@@ -3,7 +3,7 @@
     <div class="signupCard">
       <div>
         <div class="action">
-          <h1>Sign Up</h1>
+          <h1 class="font-bold text-2xl">Sign Up</h1>
         </div>
 
         <form>

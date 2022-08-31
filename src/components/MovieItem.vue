@@ -1,9 +1,9 @@
 <template>
-  <base-card class="item-action">
+  <div class="item-action mx-3 my-2 py-4">
     <button @click="loadFavourites">Favourite</button>
     <div class=""></div>
     <img :src="link" class="image" />
-  </base-card>
+  </div>
 </template>
 <script>
 import { useStore } from "vuex";
@@ -36,6 +36,8 @@ export default {
         return !ids.includes(id, index + 1);
       });
       sessionStorage.setItem("favourites", JSON.stringify(filtered));
+      const alreadyFavMovies = store.getters["favourites/favourites"];
+      console.log("alreadymovies", alreadyFavMovies);
       store.dispatch("favourites/addFavourites", {
         id: props.id,
         name: props.name,
@@ -64,8 +66,11 @@ button {
   margin-top: 0px;
   margin-bottom: 8px;
   border-radius: 0.5rem;
-  background-color: blue;
+  background-color: rgb(3, 3, 51);
   color: white;
   padding: 4px;
+}
+button :active {
+  background-color: aqua;
 }
 </style>

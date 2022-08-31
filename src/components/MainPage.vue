@@ -8,7 +8,7 @@
         <div class="search-action">
           <label for="searchMovies"></label>
           <input
-            class="searchInput"
+            class="searchInput border-2 border-inherit rounded-lg p-1"
             type="text"
             id="searchMovies"
             v-model="searchValue"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="action">
-          <button @click="newDefault">Get started</button>
+          <button class="mt-2" @click="newDefault">Get started</button>
         </div>
       </base-card>
     </form>
@@ -80,7 +80,12 @@ export default {
         movies = movies.sort(function (a, b) {
           return a.rank - b.rank;
         });
-      } else if (!activeFilters.rankByAsc && activeFilters.rankByDesc) {
+      } else if (
+        !activeFilters.rankByAsc &&
+        !activeFilters.movie &&
+        !activeFilters.tvShows &&
+        activeFilters.rankByDesc
+      ) {
         movies = movies.sort(function (a, b) {
           return b.rank - a.rank;
         });
@@ -164,7 +169,7 @@ export default {
 }
 .movieaction {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 0;

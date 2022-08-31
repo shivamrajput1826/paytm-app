@@ -2,7 +2,7 @@
   <div class="loginBody">
     <div class="loginCard">
       <div class="action">
-        <h1>Login to your Account</h1>
+        <h1 class="font-bold text-2xl">Login to your Account</h1>
       </div>
       <form>
         <div class="action" :class="{ invalid: !userName.isValid }">

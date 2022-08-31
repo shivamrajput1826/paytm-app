@@ -2,17 +2,41 @@
   <div class="header">
     <div class="card">
       <div v-if="disableHead == false" class="head-action">
-        <h1>Welcome to MovieApp</h1>
-
-        <h2>New User?</h2>
-        <router-link to="/signup">
-          <base-button @click="disableHeader">Sign Up</base-button>
-        </router-link>
-
-        <h2>Already a User?</h2>
-        <router-link to="/login">
-          <base-button @click="enableLogin">Login</base-button>
-        </router-link>
+        <h1 class="font-bold text-2xl mb-3 mt-8 border-2 p-1 rounded-lg">
+          Welcome to MovieApp
+        </h1>
+        <table class="flex flex-col justify-center items-center">
+          <tr class="flex flex-row mt-4 justify-center">
+            <td>
+              <h2
+                class="mt-1 font-medium border-2 p-1 rounded-lg mr-6 ml-4 py-2"
+              >
+                New User?
+              </h2>
+            </td>
+            <td>
+              <router-link to="/signup">
+                <base-button class="p-0 mt-1" @click="disableHeader"
+                  >Sign Up</base-button
+                >
+              </router-link>
+            </td>
+          </tr>
+          <tr class="flex flex-row mt-4">
+            <td>
+              <h2 class="mt-2 font-medium border-2 p-1 rounded-lg mr-2 py-2">
+                Already a User?
+              </h2>
+            </td>
+            <td>
+              <router-link to="/login">
+                <base-button class="mt-1" @click="enableLogin"
+                  >Login</base-button
+                >
+              </router-link>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="card">

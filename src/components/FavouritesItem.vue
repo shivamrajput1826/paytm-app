@@ -1,6 +1,6 @@
 <template>
   <div class="item-action">
-    <img :src="link" />
+    <img :src="link" class="h-[80%] w-[80%] object-cover" />
   </div>
 </template>
 <script>
@@ -20,11 +20,6 @@ export default {
 };
 </script>
 <style scopes>
-img {
-  height: 80%;
-  width: 80%;
-  object-fit: cover;
-}
 .item-action {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);

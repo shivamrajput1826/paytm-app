@@ -1,11 +1,11 @@
 <template>
   <header>
     <nav>
-      <h1>
+      <h1 class="font-bold text-3xl">
         <router-link to="/mainPage">Home</router-link>
       </h1>
       <ul>
-        <li>
+        <li class="font-large">
           <router-link to="/mainPage">Movies</router-link>
         </li>
         <li>
