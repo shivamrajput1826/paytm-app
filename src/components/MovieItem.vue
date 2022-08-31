@@ -17,11 +17,25 @@ export default {
     const router = useRouter();
     const link = computed(() => {
       const val = props.url;
-      console.log("url", val);
+      "url", val;
       return val.imageUrl;
     });
 
     function loadFavourites() {
+      var favorites = JSON.parse(sessionStorage.getItem("favourites")) || [];
+      var favorite = {
+        id: props.id,
+        name: props.name,
+        rank: props.rank,
+        url: props.url,
+      };
+      favorites.push(favorite);
+      const ids = favorites.map((o) => o.id);
+
+      const filtered = favorites.filter(({ id }, index) => {
+        return !ids.includes(id, index + 1);
+      });
+      sessionStorage.setItem("favourites", JSON.stringify(filtered));
       store.dispatch("favourites/addFavourites", {
         id: props.id,
         name: props.name,

@@ -2,7 +2,7 @@
   <the-header></the-header>
   <h1>My Favorite Movies</h1>
   <div class="card">
-    <ul v-if="hasFavorite" class="favorite-action">
+    <ul class="favorite-action">
       <f-item
         v-for="favourite in favouriteList"
         :key="favourite.id"
@@ -12,7 +12,6 @@
         :url="favourite.url"
       ></f-item>
     </ul>
-    <p v-else>No selection made</p>
   </div>
 </template>
 
@@ -21,21 +20,32 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import FItem from "./FavouritesItem.vue";
 import TheHeader from "./MainPageHeader.vue";
+import { ref } from "vue";
 
 export default {
   components: { FItem, TheHeader },
 
   setup() {
     const store = useStore();
+    const len = ref(0);
     const favouriteList = computed(() => {
-      return store.getters["favourites/favourites"];
+      let favour1 = store.getters["favourites/favourites"];
+      let favour2 = JSON.parse(sessionStorage.getItem("favourites"));
+      console.log("favour2", favour2);
+      let newfavor = { ...favour1, ...favour2 };
+      console.log("new favor", newfavor);
+
+      return newfavor;
     });
     const hasFavorite = computed(() => {
-      return store.getters["favourites/hasfavourites"];
+      let favorites = store.getters["favourites/hasfavourites"];
+
+      return favorites;
     });
-    console.log("favouriteList", favouriteList.value);
-    console.log("hasfavorite", hasFavorite);
-    return { favouriteList, hasFavorite };
+    function check() {
+      console.log("check favoritess", favouriteList);
+    }
+    return { len, favouriteList, hasFavorite, check };
   },
 };
 </script>
@@ -49,12 +59,13 @@ h1 {
   padding: 1rem;
   margin: 2rem auto;
   display: flex;
+  justify-content: center;
 }
 .favorite-action {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: no-wrap;
+  flex-wrap: wrap;
   margin-top: 0;
   width: 80%;
 }

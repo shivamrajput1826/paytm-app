@@ -20,7 +20,7 @@
         <div class="action" :class="{ invalid: !userPassword.isValid }">
           <label for="password"></label>
           <input
-            type="text"
+            type="password"
             class="form-action"
             id="password"
             required=""
@@ -51,14 +51,14 @@ export default {
         userName.isValid = false;
         formIsValid.value = false;
       }
-      if (userPassword.val === "") {
+      if (userPassword.val === "" || userPassword.val.length < 6) {
         userPassword.isValid = false;
         formIsValid.value = false;
       }
     }
     function submitedForm() {
       validatedForm();
-      console.log("form validity", formIsValid.value);
+      "form validity", formIsValid.value;
       if (!formIsValid.value) {
         return;
       }

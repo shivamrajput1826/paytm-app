@@ -20,12 +20,12 @@ export default {
         responseData = response.data.d;
       })
       .catch(function (error) {
-        console.log("error", error);
+        "error", error;
         throw error;
       });
     // const responsejson = await response.json();
 
-    console.log(responseData);
+    responseData;
     const movies = [];
     for (const key in responseData) {
       const movie = {
@@ -37,7 +37,7 @@ export default {
       };
       movies.push(movie);
     }
-    console.log("movies", movies);
+    "movies", movies;
 
     context.commit("addMovies", movies);
     context.commit("setFetchTimestamp");

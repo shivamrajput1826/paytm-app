@@ -37,7 +37,7 @@
             <label for="password"></label>
             <input
               class="form-action"
-              type="text"
+              type="password"
               id="password"
               v-model.trim="userPassword.val"
               required

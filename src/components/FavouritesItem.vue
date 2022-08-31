@@ -12,10 +12,9 @@ export default {
     const link = ref("");
     function getLink() {
       link.value = props.url.imageUrl;
-      console.log("props", props);
+      "props", props;
     }
     getLink();
-
     return { link };
   },
 };
@@ -27,6 +26,10 @@ img {
   object-fit: cover;
 }
 .item-action {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  margin: 5px;
   width: 20%;
   display: flex;
   flex-direction: column;

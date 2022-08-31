@@ -17,12 +17,12 @@ export default function useSignup() {
   });
   const formIsValid = ref(true);
   function consoleEvent() {
-    console.log(userName);
-    console.log(userEmail);
-    console.log(userPassword);
+    userName;
+    userEmail;
+    userPassword;
   }
   function check() {
-    console.log("form validity", formIsValid.value);
+    "form validity", formIsValid.value;
     router.replace("/mainPage");
   }
   function validateForm() {
@@ -31,18 +31,18 @@ export default function useSignup() {
       userName.isValid = false;
       formIsValid.value = false;
     }
-    if (userPassword.val === "") {
+    if (userPassword.val === "" || userPassword.val.length < 6) {
       userPassword.isValid = false;
       formIsValid.value = false;
     }
-    if (userEmail.val === "") {
+    if (userEmail.val === "" || !userEmail.val.includes("@")) {
       userEmail.isValid = false;
       formIsValid.value = false;
     }
   }
   function submitForm() {
     validateForm();
-    console.log("form validity", formIsValid.value);
+    "form validity", formIsValid.value;
     if (!formIsValid.value) {
       return;
     }

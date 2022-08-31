@@ -65,11 +65,11 @@ export default {
 
     const movieList = computed(() => {
       let movies = store.getters["movies/isMovies"];
-      console.log("unfilter", movies);
+      "unfilter", movies;
       movies = movies.filter(
         (movie) => movie.image != undefined && movie.qid != undefined
       );
-      console.log("filter", movies);
+      "filter", movies;
 
       if (
         activeFilters.rankByAsc &&
@@ -89,22 +89,22 @@ export default {
       } else if (activeFilters.tvShows) {
         movies = movies.filter((movie) => movie.qid == "tvSeries");
       }
-      console.log("movies is still there", movies);
+      "movies is still there", movies;
       return movies;
     });
     function check() {
-      console.log("isMovies", movieList);
+      "isMovies", movieList;
     }
     function setFilters(filters) {
       Object.assign(activeFilters, filters);
-      console.log("activefilters", activeFilters);
+      "activefilters", activeFilters;
     }
     async function loadMovies() {
       isLoading.value = true;
       try {
         await store.dispatch("movies/fetchMovies", defaultValue);
       } catch (e) {
-        console.log("error here", e);
+        "error here", e;
       }
       isLoading.value = false;
     }
@@ -116,7 +116,7 @@ export default {
         try {
           await store.dispatch("movies/fetchMovies", searchValue);
         } catch (e) {
-          console.log("error is", e);
+          "error is", e;
         }
         isLoading.value = false;
       } else {
@@ -124,7 +124,7 @@ export default {
         try {
           await store.dispatch("movies/fetchMovies", defaultValue);
         } catch (e) {
-          console.log("error here", e);
+          "error here", e;
         }
         isLoading.value = false;
       }

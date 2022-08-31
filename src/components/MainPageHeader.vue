@@ -11,12 +11,22 @@
         <li>
           <router-link to="/favourites">Favourites</router-link>
         </li>
-        <li><router-link to="/">Logout</router-link></li>
+        <li><router-link to="/" @click="check">Logout</router-link></li>
       </ul>
     </nav>
   </header>
 </template>
-
+<script>
+export default {
+  setup() {
+    function check() {
+      console.log("logout");
+      window.sessionStorage.clear();
+    }
+    return { check };
+  },
+};
+</script>
 <style scoped>
 header {
   width: 100%;

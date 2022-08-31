@@ -41,9 +41,9 @@ export default {
         [inputId]: isActive,
       };
 
-      console.log(updateFilters, inputId);
+      updateFilters, inputId;
       Object.assign(filters, updateFilters);
-      console.log("filters", filters);
+      "filters", filters;
       context.emit("change-filters", updateFilters);
     }
     return { filters, setFilter };
