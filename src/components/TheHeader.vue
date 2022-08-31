@@ -38,12 +38,9 @@ export default {
 };
 </script>
 <style scoped>
-body {
-  background-color: black;
-}
-h1 {
+/* h1 {
   margin-bottom: 10px;
-}
+} */
 h2 {
   margin-bottom: 5px;
 }
